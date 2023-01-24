@@ -1,0 +1,277 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html : charset = UTF-8 ">
+	<link rel="stylesheet" href="../guide.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet" type="text/css">
+	<title>【公式】運営カレンダー | 東京ジムニーランド</title>
+</head>
+<header>
+	<div class="title1">
+		<h1 class="name"><a href="../index.html"><ruby>Tokyo Gymneyland<rt>東京ジムニーランド</rt></ruby></a></h1>
+	</div>
+	<div calss="tabs" >
+		<input id="t_index" type="radio" name="tab_item" checked>
+		<label class="tab_item1" for="t_index" ><a href="../guide.html">来園ガイド</a></label>
+
+		<input id="t_news" type="radio" name="tab_item">
+		<label class="tab_item2" for="t_news" ><a href="../map.html">園内マップ</a></label>
+
+		<input id="t_att" type="radio" name="tab_item">
+		<label class="tab_item3" for="t_att" ><a href="../attraction.html">アトラクション</a></label>
+
+		<input id="t_shop" type="radio" name="tab_item">
+		<label class="tab_item4" for="t_shop" ><a href="../shop.html">ショップ</a></label>
+
+		<input id="t_hotel" type="radio" name="tab_item">
+		<label class="tab_item5" for="t_hotel" ><a href="../parade.html">パレード</a></label>
+	</div>
+</header>
+<body>
+	<div class="succession">
+    	<a href="../index.html" class="suc">HOME</a> > <a href="../guide.html" class="suc">来園ガイド</a> > 営業日・休業日
+	</div>
+	<div class="guide"><p>営業日・休業日</p></div>
+	<div class="line"></div>
+	<style>
+		@charset "utf-8";
+		.c_body{
+			height: 600px
+		}
+
+		.day_list{
+			display: flex;
+		}
+
+		.b_day1{
+			width: 300px;
+			height: 40px;
+			margin-left: auto;
+			margin-top: 30px;
+			text-align: center;
+			line-height: 40px;
+			border: solid 1px black;
+		}
+
+		.b_day2{
+			width: 300px;
+			height: 40px;
+			margin-right: auto;
+			margin-top: 30px;
+			text-align: center;
+			line-height: 40px;
+			border-right: solid 1px black;
+			border-top: solid 1px black;
+			border-bottom: solid 1px black;
+		}
+
+		.h_day1{
+			width: 300px;
+			height: 40px;
+			margin-left: auto;
+			text-align: center;
+			line-height: 40px;
+			border-left: solid 1px black;
+			border-right: solid 1px black;
+			border-bottom: solid 1px black;
+		}
+
+		.h_day2{
+			width: 300px;
+			height: 40px;
+			margin-right: auto;
+			text-align: center;
+			line-height: 40px;
+			border-bottom: solid 1px black;
+			border-right: solid 1px black;
+		}
+
+		/*全体*/
+		.wrapper{
+			max-width: 600px;
+			margin: 0 auto;
+			color: black;
+		}
+		#header {
+			text-align: center;
+			font-size: 24px;
+			width: 100%;
+			margin: 1rem 0 0;
+		}
+
+		/*カレンダー*/
+		#calendar {
+			text-align: center;
+			width: 100%;
+		}
+		table {
+			outline: 2px solid black;
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th {
+			color: #000;
+		}
+		th, td {
+			outline: 1px solid lightgray;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			text-align: center;
+		}
+		/*日曜日*/
+		td:first-child {
+			color: crimson;
+		}
+		/*土曜日*/
+		td:last-child {
+			color: dodgerblue;
+		}
+		/*前後月の日付*/
+		td.disabled {
+			color: #ccc;
+		}
+		/*本日*/
+		td.today {
+			background-color: #D65E72;
+			color: #fff;
+		}
+
+		/*ボタン*/
+		#next-prev-button {
+			position: relative;
+		}
+		#next-prev-button button{
+			cursor: pointer;
+			background: #B78D4A;
+			color: #fff;
+			border: 1px solid #B78D4A;
+			border-radius: 4px;
+			font-size: 1rem;
+			padding: 0.5rem 2rem;
+			margin: 1rem 0;
+		}
+		#next-prev-button button:hover{
+			background-color: #D4BB92;
+			border-color: #D4BB92;
+		}
+		#prev {
+			float: left;
+		}
+		#next {
+			float: right;
+		}
+	</style>
+	<script>
+		const week = ["日", "月", "火", "水", "木", "金", "土"];
+		const today = new Date();
+		// 月末だとずれる可能性があるため、1日固定で取得
+		var showDate = new Date(today.getFullYear(), today.getMonth(), 1);
+		
+		// 初期表示
+		window.onload = function () {
+			showProcess(today, calendar);
+		};
+		// 前の月表示
+		function prev(){
+			showDate.setMonth(showDate.getMonth() - 1);
+			showProcess(showDate);
+		}
+		
+		// 次の月表示
+		function next(){
+			showDate.setMonth(showDate.getMonth() + 1);
+			showProcess(showDate);
+		}
+		
+		// カレンダー表示
+		function showProcess(date) {
+			var year = date.getFullYear();
+			var month = date.getMonth();
+			document.querySelector('#header').innerHTML = year + "年 " + (month + 1) + "月";
+		
+			var calendar = createProcess(year, month);
+			document.querySelector('#calendar').innerHTML = calendar;
+		}
+		
+		// カレンダー作成
+		function createProcess(year, month) {
+			// 曜日
+			var calendar = "<table><tr class='dayOfWeek'>";
+			for (var i = 0; i < week.length; i++) {
+				calendar += "<th>" + week[i] + "</th>";
+			}
+			calendar += "</tr>";
+		
+			var count = 0;
+			var startDayOfWeek = new Date(year, month, 1).getDay();
+			var endDate = new Date(year, month + 1, 0).getDate();
+			var lastMonthEndDate = new Date(year, month, 0).getDate();
+			var row = Math.ceil((startDayOfWeek + endDate) / week.length);
+		
+			// 1行ずつ設定
+			for (var i = 0; i < row; i++) {
+				calendar += "<tr>";
+				// 1colum単位で設定
+				for (var j = 0; j < week.length; j++) {
+					if (i == 0 && j < startDayOfWeek) {
+						// 1行目で1日まで先月の日付を設定
+						calendar += "<td class='disabled'>" + (lastMonthEndDate - startDayOfWeek + j + 1) + "</td>";
+					} else if (count >= endDate) {
+						// 最終行で最終日以降、翌月の日付を設定
+						count++;
+						calendar += "<td class='disabled'>" + (count - endDate) + "</td>";
+					} else {
+						// 当月の日付を曜日に照らし合わせて設定
+						count++;
+						if(year == today.getFullYear()
+						&& month == (today.getMonth())
+						&& count == today.getDate()){
+							calendar += "<td class='today'>" + count + "</td>";
+						} else {
+							calendar += "<td>" + count + "</td>";
+						}
+					}
+				}
+				calendar += "</tr>";
+			}
+			return calendar;
+		}
+	</script>
+	<div class="c_body">
+		<div class="wrapper">
+			<!-- xxxx年xx月を表示 -->
+			<h1 id="header"></h1>
+		
+			<!-- ボタンクリックで月移動 -->
+			<div id="next-prev-button">
+				<button id="prev" onclick="prev()">‹</button>
+				<button id="next" onclick="next()">›</button>
+			</div>
+		
+			<!-- カレンダー -->
+			<div id="calendar"></div>
+		</div>
+		<div class="day_list">
+			<div class="b_day1">営業日</div>
+			<div class="b_day2">平日 月曜～金曜　9:00～22:00</div>
+		</div>
+		<div class="day_list">
+			<div class="h_day1">休業日</div>
+			<div class="h_day2">土曜日・日曜日・祝日</div>
+		</div>
+	</div>
+</body>
+<footer>
+	<div class="band">
+		<ul class="band_boxs">
+			<a href="../band/gymney.html" class="band_box"><li>ジムニーランドとは</li></a>
+			<a href="../band/privacy.html" class="band_box"><li>プライバシーポリシー</li></a>
+			<a href="../band/recruit.html" class="band_box"><li>採用情報</li></a>
+			<a href="../band/disclaimer.html" class="band_box"><li>免責事項</li></a>
+		</ul>
+	</div>
+	<div class="small">
+		<small>©Gymney. All rights reserved.</small>
+	</div>
+</footer>
+</html>

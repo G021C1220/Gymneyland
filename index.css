@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/earlyaccess/hannari.css');
+
+
+.title1{
+  width: 100%;
+  height: 120px;
+  padding-top: 20px;
+}
+
+.name {
+  color: #000;
+  text-shadow: 10px 10px 20px silver;
+  font-weight: bold;
+  font-size:60px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
+.tabs {
+  margin-top: 0px;
+  padding-bottom: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.tab_item1 {
+  width: calc(100%/5);
+  height: 50px;
+  border-bottom: 5px solid #D75674;
+  background-color: #ebe9e9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #505050;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.tab_item2 {
+  width: calc(100%/5);
+  height: 50px;
+  border-bottom: 5px solid #FBA032;
+  background-color: #ebe9e9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #505050;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.tab_item3 {
+  width: calc(100%/5);
+  height: 50px;
+  border-bottom: 5px solid #89BD38;
+  background-color: #ebe9e9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #505050;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.tab_item4 {
+  width: calc(100%/5);
+  height: 50px;
+  border-bottom: 5px solid #0093A8;
+  background-color: #ebe9e9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #505050;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.tab_item5 {
+  width: calc(100%/5);
+  height: 50px;
+  border-bottom: 5px solid #7669B4;
+  background-color: #ebe9e9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #505050;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.tab_item1:hover,.tab_item2:hover,.tab_item3:hover,.tab_item4:hover,.tab_item5:hover {
+  opacity: 0.8;
+}
+
+input[name="tab_item"] {
+  display: none;
+}
+
+.tab_text{
+opacity: 0.5;
+}
+
+.tabs input:checked + .tab_item {
+  background-color: #bbbbbb;
+  color: #fff;
+}
+
+/*--------------------スライダー--------------------*/
+
+
+.out{
+  position: relative;
+  height: auto;
+  margin-top: 55px;
+  border-bottom: 3px solid #575757;
+  min-width: fit-content;
+  aspect-ratio: 16 / 9;
+}
+.in img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: .5s;
+  z-index: 0;
+}
+img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+input{
+  display: none;
+}
+.in{
+  display: flex;
+  justify-content: center;
+}
+label span{
+  display: block;
+  width: 15px;
+  height: 15px;
+  padding: 7px;
+  margin: -40px 0 0;
+  border-radius: 100%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+label span::before{
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #575757;
+  opacity: 0.5;
+  border-radius: 100%;
+}            
+input:nth-of-type(1):checked ~ .in label:nth-of-type(1) span::before,
+input:nth-of-type(2):checked ~ .in label:nth-of-type(2) span::before,
+input:nth-of-type(3):checked ~ .in label:nth-of-type(3) span::before{
+  background: #000;
+  opacity: 1;
+}
+label span::before{
+  animation: slidebutton 14s infinite;
+}
+@keyframes slidebutton{
+  0%{opacity: 0.5;background: #000;}
+  3.5%{opacity: 1;background: #000;}
+  25%{opacity: 1;background: #000;}
+  28.5%{opacity: 0.5;background: #000;}
+}            
+label:nth-of-type(2) span::before,label:nth-of-type(2) img{
+  animation-delay: 3.5s;
+}            
+label:nth-of-type(3) span::before,label:nth-of-type(3) img{
+  animation-delay: 7s;
+}            
+input:nth-of-type(1):checked ~ .in label:nth-of-type(1) img,
+input:nth-of-type(2):checked ~ .in label:nth-of-type(2) img,
+input:nth-of-type(3):checked ~ .in label:nth-of-type(3) img{
+  opacity: 1;
+  z-index: 1;
+}
+.in img{
+  animation: slide 14s infinite;
+  opacity: 0;
+}
+@keyframes slide{
+  0%{opacity: 0;}
+  3.5%{opacity: 1;z-index: 1;}
+  25%{opacity: 1;}
+  28.5%{opacity: 0;z-index: 0;}
+}
+input:checked ~ .in img,input:checked ~ .in span::before{
+  animation: none;
+}
+
+/*-------------------------ニューストピックス-------------------------*/
+
+.news_topic{
+  width: 100%;
+  height: 500px;
+  background-color: #A8B7CD;
+
+}
+
+.t_title{
+  width: 1000px;
+  height: 100px;
+
+  margin: auto;
+
+  line-height: 100px;
+  text-align: center;
+
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.news_list{
+  width: 1000px;
+  height: 400px;
+  max-width: 90%;
+
+
+  margin: auto;
+}
+
+.news_item{
+  display: flex;
+
+  width: 1000px;
+  height: 100px;
+
+  margin-bottom: 20px;
+
+  border-radius: 10px;
+  border:  1px solid black;
+  background-color: white;
+}
+
+.news_img_1{
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  background-color: lightblue;
+  margin-left: 50px;
+}
+
+.news_img_2{
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  background-color: lightblue;
+  margin-left: 50px;
+}
+
+.news_img_3{
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  background-color: lightblue;
+  margin-left: 50px;
+}
+
+.news_text{
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.item_title{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+
+/*-------------------------サイトマップ-------------------------*/
+
+.band{
+  width: 100%;
+  height: 100px;
+  background-color: lightgray;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.band_boxs{
+  width: 1000px;
+  margin: auto;
+  display: flex;
+}
+
+.band_box{
+  padding: 5px;
+  width: 200px;
+  margin: auto;
+  margin-top: 30px;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+
+/*---------------------------------------------------*/
+
+
+.small{
+  margin: 25px;
+  text-align: center;
+}
+
+/*---------------------------------------------------*/
+
+body{
+  width: 100%;
+  margin-right: 0%;
+}
+
+a {
+  color:#000000;
+  text-decoration:none;
+}
+
+h2{
+  font-size: 40px;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+li{
+  list-style: none;
+}
+
+*{
+  margin:0;
+  padding:0;
+  max-width: 100%;
+
+  }
+
